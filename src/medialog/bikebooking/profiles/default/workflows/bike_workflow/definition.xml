@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="bike_workflow" title="Bike Workflow" description="" state_variable="review_state"         initial_state="utleibar" manager_bypass="False" >
+ 
+ <permission>Access contents information</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <state state_id="reservert" title="Reservert" >
+  <exit-transition transition_id="lei_ut" />
+  <exit-transition transition_id="ta_inn" />
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Authenticated</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="True">
+   <permission-role>Authenticated</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  
+  
+ </state>
+ <state state_id="utilgjengelig" title="Uilgjengelig" >
+  <exit-transition transition_id="ta_inn" />
+  
+  
+  
+ </state>
+ <state state_id="utleibar" title="Utleibar" >
+  <exit-transition transition_id="lei_ut" />
+  <exit-transition transition_id="reserver" />
+  <exit-transition transition_id="ta_ut" />
+  
+  
+  
+ </state>
+ <state state_id="utleid" title="Utleid" >
+  <exit-transition transition_id="reserver" />
+  <exit-transition transition_id="ta_inn" />
+  <permission-map name="Access contents information" acquired="True">
+   
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="True">
+   
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   
+  </permission-map>
+  
+  
+ </state>
+ <transition transition_id="lei_ut" title="lei ut" new_state="utleid" trigger="USER" before_script="" after_script="" >
+  <description>lei ut sykkel</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=lei_ut" category="workflow" icon="">Lei ut</action>
+  <guard >
+   <guard-permission>Modify portal content</guard-permission>
+  </guard>
+  
+ </transition>
+ <transition transition_id="reserver" title="Reserver" new_state="reservert" trigger="USER" before_script="" after_script="" >
+  <description>Reserver sykkel</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=reserver" category="workflow" icon="">Reserver </action>
+  <guard >
+   <guard-permission>Modify portal content</guard-permission>
+  </guard>
+  
+ </transition>
+ <transition transition_id="ta_inn" title="Gjør tilgjengelig" new_state="utleibar" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=ta_inn" category="workflow" icon="">Gjør tilgjengelig</action>
+  <guard >
+   <guard-permission>Modify portal content</guard-permission>
+  </guard>
+  
+ </transition>
+ <transition transition_id="ta_ut" title="Kan ikke leies ut" new_state="utilgjengelig" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=ta_ut" category="workflow" icon="">Kan ikke leies ut</action>
+  <guard >
+   <guard-permission>Modify portal content</guard-permission>
+  </guard>
+  
+ </transition>
+ 
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True" >
+  <description>Previous transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard >
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True" >
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard >
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True" >
+  <description>Comment about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard >
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False" >
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard >
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True" >
+  <description>When the previous transition was performed</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard >
+  </guard>
+ </variable>
+ 
+</dc-workflow>

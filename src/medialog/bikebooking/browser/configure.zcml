@@ -1,0 +1,45 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="medialog.bikebooking">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="medialog.bikebooking.interfaces.IMedialogBikebookingLayer"
+      />
+
+  <!-- Publish static files -->
+  <browser:resourceDirectory
+      name="medialog.bikebooking"
+      directory="static"
+      />
+      
+ 
+
+    <browser:page
+          for="*"
+          name="booking-form"
+          permission="zope2.View"
+          class=".form.BookingForm"
+          />
+
+
+    <browser:page
+          for="*"
+          name="confirm-form"
+          permission="zope2.View"
+          class=".form.ConfirmForm"
+          />
+
+    <browser:page
+          for="*"
+          name="bikes-view"
+          permission="zope2.View"
+          template="bikes_view.pt"
+          class=".form.BikesView"
+          />
+
+</configure>

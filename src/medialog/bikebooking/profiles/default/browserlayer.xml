@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<layers>
+  <layer
+      name="medialog.bikebooking"
+      interface="medialog.bikebooking.interfaces.IMedialogBikebookingLayer"
+      />
+</layers>

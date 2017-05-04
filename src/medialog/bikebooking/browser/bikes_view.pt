@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+ 
+ 
+<metal:content-core fill-slot="content-core"
+          tal:define="templateId template/getId;">
+ 
+ 
+      	<div class="features" tal:define="righttime view/righttime">
+			<tal:repeat tal:repeat="item 
+					context/@@contentlisting">
+				<div class="feature  wow fadeInDown animated" 
+					data-wow-delay="600ms" data-wow-duration="1000ms" 
+					style="visibility: visible; animation-duration: 1000ms; 
+					animation-delay: 600ms; animation-name: fadeInDown;"
+					tal:condition="python: righttime > item.dato">
+					<div class="feature center ${item/review_state}" 
+						 tal:define="item_url item/getURL|item/absolute_url">
+					  <a href="#" tal:attributes="href item_url">
+						<i>
+						<span class='fa iconfont ${item/iconfield}'
+                               style='color #${item/color}'> </span>
+                        </i>
+						<h2 tal:content="item/Title" />
+					  </a>
+						<h3 tal:content="item/Description" tal:condition="item/Description"/>
+						<a class="button btn   context" href="#" tal:attributes="href item_url">Reserver sykkel</a>
+					</div>            
+
+				</div>
+           </tal:repeat>
+    </div>
+    <tal:css tal:replace="structure context/@@fontload"/>
+ 
+</metal:content-core>
+
+</body>
+</html>
+
+
+
+
+
