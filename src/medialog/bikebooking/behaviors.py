@@ -40,6 +40,10 @@ class IBikeBookingBehavior(form.Schema):
                       default="Hvor mange sykler"),
         default=10,
     )
+    
+    pickup_date = schema.Date(
+        title = _("Hentedato", default=u"Hentedato"),
+    )
 
     form.widget(person_pair=DataGridFieldFactory)
     person_pair = schema.List(
