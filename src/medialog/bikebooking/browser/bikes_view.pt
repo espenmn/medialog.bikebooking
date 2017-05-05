@@ -34,7 +34,7 @@
     						${python: item.pickup_date}</span>
 						</p>
 						<a class="button btn context pat-plone-modal" 
-							tal:attributes="href item_url">Reserver sykkel</a>
+							tal:attributes="href item_url">Reserver sykkel (${short})</a>
 						
 					</div>            
 
