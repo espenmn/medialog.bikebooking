@@ -55,7 +55,6 @@ class BookingForm(form.SchemaForm):
         if data['email'].endswith('medialog.no') or data['email'].endswith('asvg.no'):
             email = data['email']
             name = data['name']
-            import pdb; pdb.set_trace()
             #uke = data['uke']
             #self.context.email = email
             #self.context.navn = name
@@ -117,7 +116,6 @@ class ConfirmForm(BrowserView):
                     "Warning"
                     )
                 else:
-                    import pdb; pdb.set_trace()
                     if not self.in_dictlist('email', email):
                         self.context.person_pair.append({'name': name, 'email': email})
                     

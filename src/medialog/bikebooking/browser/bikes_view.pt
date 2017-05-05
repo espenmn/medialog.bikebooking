@@ -33,7 +33,9 @@
 						<p>Hentes: <span class="pat-moment"   data-pat-moment="format:calendar">
     						${python: item.pickup_date}</span>
 						</p>
-						<a class="button btn   context" href="#" tal:attributes="href item_url">Reserver sykkel</a>
+						<a class="button btn context pat-plone-modal" 
+							tal:attributes="href item_url">Reserver sykkel</a>
+						
 					</div>            
 
 				</div>
