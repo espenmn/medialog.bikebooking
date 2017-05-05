@@ -42,7 +42,6 @@ class BookingForm(form.SchemaForm):
     
     #+  context.uke + "Dvs: mandag " 
     #Week(2011, 40).monday()
-    #str(uke)
     
     
     
@@ -55,17 +54,13 @@ class BookingForm(form.SchemaForm):
         if data['email'].endswith('medialog.no') or data['email'].endswith('asvg.no'):
             email = data['email']
             name = data['name']
-            #uke = data['uke']
-            #self.context.email = email
-            #self.context.navn = name
-            #self.context.dato = datetime.now()
             id = self.context.id
-            mailbody = 'Hei, ' + name + '\n' +  u'Vennligst klikk lenken og bekreft reserveringen' + '\n' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + "&name=" + name.encode('utf8') \
-             + u'\n\n\n For senere fjerning av reserveringen, klikk her \n' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + "&name=" + name.encode('utf8') + '&bestille=0'
+            mailbody = '<html>Hei, ' + name + '\n' +  '<a href="' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + '&name=' + name + '>Vennligst klikk lenken og bekreft reserveringen</a>"' \
+             + '\n\n\n For senere fjerning av reserveringen, <a href="' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + '&name=' + name + '&bestille=0">klikk her</a></html>'
             api.portal.send_email(
                 recipient=data['email'],
                 subject="Sykkelreservasjon",
-                body=mailbody,
+                body=mailbody.encode('utf8'),
                 )
             IStatusMessage(self.request).addStatusMessage(
                 u"En epost blir straks sendt deg. \n Bekreft reservasjonen snarest mulig", "info"
@@ -105,16 +100,25 @@ class ConfirmForm(BrowserView):
         if email.endswith('medialog.no') or email.endswith('asvg.no'):
             try:
                 if bestille == '0':
-                    self.context.person_pair.remove(in_dictlist('email', email))
+                    self.context.person_pair.remove(self.in_dictlist('email', email))
+                    api.portal.send_email(
+                        recipient=data['email'],
+                        subject="Sykkelreservasjon",
+                        body=u'Din sykkelreservasjon har blitt fjernet',
+                    )
                     IStatusMessage(self.request).addStatusMessage(
                     u"Din reservering er fjernet",
-                    "Warning"
+                    "Info"
                     )
+                    contextURL = api.portal.get().absolute_url()
+                    self.request.response.redirect(contextURL)
                 elif len(context.person_pair) >= context.bikes:
                     IStatusMessage(self.request).addStatusMessage(
                     u"Alle sykler er reservert",
-                    "Warning"
+                    "Info"
                     )
+                    contextURL = api.portal.get().absolute_url()
+                    self.request.response.redirect(contextURL)
                 else:
                     if not self.in_dictlist('email', email):
                         self.context.person_pair.append({'name': name, 'email': email})
