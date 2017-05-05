@@ -104,11 +104,11 @@ class ConfirmForm(BrowserView):
         name   = self.request.name.encode('utf8') 
         if email.endswith('medialog.no') or email.endswith('asvg.no'):
             try:
-                if bestille == 0:
-                    self.context_person_pair.remove(in_dictlist('email', email))
+                if bestille == '0':
+                    self.context.person_pair.remove(in_dictlist('email', email))
                     IStatusMessage(self.request).addStatusMessage(
                     u"Din reservering er fjernet",
-                    "Info"
+                    "Warning"
                     )
                 elif len(context.person_pair) >= context.bikes:
                     IStatusMessage(self.request).addStatusMessage(
