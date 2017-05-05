@@ -9,12 +9,8 @@ from plone import api
 from Products.statusmessages.interfaces import IStatusMessage
 
 from datetime import *
+#from isoweek import Week
 
-
-#from AccessControl import ClassSecurityInfo, getSecurityManager
-#from AccessControl.SecurityManagement import newSecurityManager, setSecurityManager
-#from AccessControl.User import nobody
-#from AccessControl.User import UnrestrictedUser as BaseUnrestrictedUser
 
 
 
@@ -31,7 +27,6 @@ class IBookingForm(form.Schema):
     
 
 
-
 class BookingForm(form.SchemaForm):
     """ Define Form handling
 
@@ -40,10 +35,14 @@ class BookingForm(form.SchemaForm):
     schema = IBookingForm
     ignoreContext = True
     
-    uke = datetime.today().isocalendar()[1]
+    #uke = datetime.today().isocalendar()[1]
 
     label = u"Reserver sykkel"
-    description = u"Reserver sykkel for <b>neste</b> uke. Dvs. Ukenummmer: " +  str(uke)
+    description = u"Reserver sykkel " 
+    
+    #+  context.uke + "Dvs: mandag " 
+    #Week(2011, 40).monday()
+    #str(uke)
     
     
     
@@ -56,18 +55,21 @@ class BookingForm(form.SchemaForm):
         if data['email'].endswith('medialog.no') or data['email'].endswith('asvg.no'):
             email = data['email']
             name = data['name']
-            self.context.email = email
-            self.context.navn = name
-            self.context.dato = datetime.now()
+            import pdb; pdb.set_trace()
+            #uke = data['uke']
+            #self.context.email = email
+            #self.context.navn = name
+            #self.context.dato = datetime.now()
             id = self.context.id
-            mailbody = 'Hei, ' + name + '\n' +  u'Vennligst klikk lenken og bekreft reserveringen' + '\n' +  self.context.absolute_url() + '/@@confirm-form?reservasjon=' + email
+            mailbody = 'Hei, ' + name + '\n' +  u'Vennligst klikk lenken og bekreft reserveringen' + '\n' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + "&name=" + name.encode('utf8') \
+             + u'\n\n\n For senere fjerning av reserveringen, klikk her \n' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + "&name=" + name.encode('utf8') + '&bestille=0'
             api.portal.send_email(
                 recipient=data['email'],
                 subject="Sykkelreservasjon",
                 body=mailbody,
                 )
             IStatusMessage(self.request).addStatusMessage(
-                u"En epost blir straks sendt deg. \n Bekreft reservasjonen innen 15 minutter", "info"
+                u"En epost blir straks sendt deg. \n Bekreft reservasjonen snarest mulig", "info"
             )
             contextURL = api.portal.get().absolute_url()
             self.request.response.redirect(contextURL)
@@ -88,24 +90,45 @@ class ConfirmForm(BrowserView):
     """
 
     label = u"Bekreft Reservasjon av sykkel"
-
     
-    def __call__(self, reservation=None):
+    
+    def in_dictlist(self, key, value):
+        for this in self.context.person_pair:
+            if this[key] == value:
+                return this
+        return False
+    
+    def __call__(self, email="", name="", bestille=""):
         context = self.context
-        epost = self.request.reservasjon
-        description = context.email
-    
-        if self.context.email == epost:
+        #bestille = self.request.bestille
+        email  = self.request.email
+        name   = self.request.name.encode('utf8') 
+        if email.endswith('medialog.no') or email.endswith('asvg.no'):
             try:
-                with api.env.adopt_roles(['Manager']):
-                    api.content.transition(context, transition='reserver')
-                ##context.reindexObject()
-                IStatusMessage(self.request).addStatusMessage(
-                    u"Din reservasjon er bekreftet",
-                    "info"
-                )
+                if bestille == 0:
+                    self.context_person_pair.remove(in_dictlist('email', email))
+                    IStatusMessage(self.request).addStatusMessage(
+                    u"Din reservering er fjernet",
+                    "Info"
+                    )
+                elif len(context.person_pair) >= context.bikes:
+                    IStatusMessage(self.request).addStatusMessage(
+                    u"Alle sykler er reservert",
+                    "Warning"
+                    )
+                else:
+                    import pdb; pdb.set_trace()
+                    if not self.in_dictlist('email', email):
+                        self.context.person_pair.append({'name': name, 'email': email})
+                    
+                    #   with api.env.adopt_roles(['Manager']):
+                    #   api.content.transition(context, transition='reserver')
+                    
+                    IStatusMessage(self.request).addStatusMessage(
+                        u"Din reservasjon er bekreftet",
+                        "info"
+                    )
                 contextURL = api.portal.get().absolute_url()
-                #self.context.absolute_url() + '/content_status_modify?workflow_action=reserver'
                 self.request.response.redirect(contextURL)
             except:
                 self.status = "Noe gikk gale med reservasjonen"
@@ -119,8 +142,10 @@ class BikesView(BrowserView):
 
     """
 
-    def righttime(self):
-        return datetime.now() - timedelta(minutes=15)
+    #def bikes(self):
+    #    return len(self.context.person_pair) < self.context.bikes
+         
+
         
     
     

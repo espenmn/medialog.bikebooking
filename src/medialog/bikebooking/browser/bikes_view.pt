@@ -12,20 +12,20 @@
           tal:define="templateId template/getId;">
  
  
-      	<div class="features" tal:define="righttime view/righttime">
+      	<div class="features">
 			<tal:repeat tal:repeat="item 
 					context/@@contentlisting">
 				<div class="feature  wow fadeInDown animated" 
 					data-wow-delay="600ms" data-wow-duration="1000ms" 
 					style="visibility: visible; animation-duration: 1000ms; 
 					animation-delay: 600ms; animation-name: fadeInDown;"
-					tal:condition="python: righttime > item.dato">
+					tal:define="short python: item.bikes - len(item.person_pair)"
+					tal:condition="python: item.bikes > len(item.person_pair)">
 					<div class="feature center ${item/review_state}" 
 						 tal:define="item_url item/getURL|item/absolute_url">
 					  <a href="#" tal:attributes="href item_url">
 						<i>
-						<span class='fa iconfont ${item/iconfield}'
-                               style='color #${item/color}'> </span>
+						<span class='fa iconfont fa-bicycle booked-${short}'> </span>
                         </i>
 						<h2 tal:content="item/Title" />
 					  </a>

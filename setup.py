@@ -49,7 +49,8 @@ setup(
         'plone.app.dexterity',
         'plone.api',
         'plone.app.z3cform',
-        'plone.directives.form'
+        'plone.directives.form',
+        'collective.z3cform.datagridfield',
     ],
     extras_require={
         'test': [
