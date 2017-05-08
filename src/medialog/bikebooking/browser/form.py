@@ -57,18 +57,35 @@ class BookingForm(form.SchemaForm):
             email = data['email']
             checksum = hashlib.sha224(data['email']).hexdigest()
             name = data['name']
-            #id = self.context.id
-            #mailbody = 'Hei, ' + name + '\n' +  u'Vennligst klikk lenken og bekreft reserveringen' + '\n' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + "&name=" + name.encode('utf8') \
-            # + u'\n\n\n For senere fjerning av reserveringen, klikk her \n' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + "&name=" + name.encode('utf8') + '&bestille=0'
-            
             
             html = """\
                 <html>
-                  <head></head>
+                  <head>
+                  <style>.button {
+                 border: none;
+                 background: #777;
+                 color: #fff;
+                 padding: 10px;
+                 display: inline-block;
+                 margin: 10px 0px;
+                 font-family: Helvetica, Arial, sans-serif;
+                 -webkit-border-radius: 3px;
+                 -moz-border-radius: 3px;
+                 border-radius: 3px;
+                 text-decoration: none;
+                 }
+
+                 .button:hover {
+                 color: #fff;
+                 background: #666;
+                 }
+                 </style>
+                  </head>
                   <body>
-                    <p>Hei, %{name}s<br>
-                       <a href="%{url}s/@@confirm-form?email=%{email}s&name=%{name}s&checksum=%{checksum}s"> Vennligst klikk p&aring; lenken og bekreft reserveringen"</a><br><br><br>
-                       <a href="%{url}s/@@confirm-form?email=%{email}s&name=%{name}s&bestille=0&checksum=%{checksum}s"> Hvis du senere trenger &aring; 'avbestille', klikk her</a>
+                    <p>Hei, %(name)s<br><br>
+                       <a class="button" href="%(url)s/@@confirm-form?email=%(email)s&name=%(name)s&checksum=%(checksum)s">Bekreft reserveringen</a><br><br><br>
+                       <br/><hr /><br/>
+                       <a href="%(url)s/@@confirm-form?email=%(email)s&name=%(name)s&checksum=%(checksum)s&bestille=0"> Hvis du senere trenger &aring; avbestille - klikk her</a>
                     </p>
                   </body>
                 </html>
@@ -77,6 +94,7 @@ class BookingForm(form.SchemaForm):
                          'url':  self.context.absolute_url(),
                          'checksum': checksum,
                     }
+                    
             mailbody = MIMEText(html, 'html')
             api.portal.send_email(
                 recipient=data['email'],
@@ -106,31 +124,30 @@ class ConfirmForm(BrowserView):
 
     label = u"Bekreft Reservasjon av sykkel"
     
-    
     def in_dictlist(self, key, value):
         for this in self.context.person_pair:
             if this[key] == value:
                 return this
         return False
     
-    def __call__(self, email="", name="", bestille="", checksum=0):
+    def __call__(self, email="", name="", bestille="", checksum="nothing"):
         context = self.context
         #bestille = self.request.bestille
-        email  = self.request.email
+        #email  = self.request.email
         name   = self.request.name.encode('utf8') 
-        if self.request.checksum == hashlib.sha224(data['email']).hexdigest():
+        if checksum == hashlib.sha224(email).hexdigest():
             if email.endswith('medialog.no') or email.endswith('asvg.no'):
                 try:
                     if bestille == '0':
-                        self.context.person_pair.remove(self.in_dictlist('email', email))
-                        api.portal.send_email(
-                            recipient=data['email'],
-                            subject="Sykkelreservasjon",
-                            body=u'Din sykkelreservasjon har blitt fjernet',
-                        )
+                        if self.in_dictlist('email', email):
+                            self.context.person_pair.remove(self.in_dictlist('email', email))
+                            api.portal.send_email(
+                                recipient=data['email'],
+                                subject="Sykkelreservasjon",
+                                body=u'Din sykkelreservasjon har blitt fjernet',
+                            )
                         IStatusMessage(self.request).addStatusMessage(
-                        u"Din reservering er fjernet",
-                        "Info"
+                            u"Din reservering er fjernet", "Info"
                         )
                         contextURL = api.portal.get().absolute_url()
                         self.request.response.redirect(contextURL)
@@ -144,9 +161,9 @@ class ConfirmForm(BrowserView):
                     else:
                         if not self.in_dictlist('email', email):
                             self.context.person_pair.append({'name': name, 'email': email})
-                    
-                        #   with api.env.adopt_roles(['Manager']):
-                        #   api.content.transition(context, transition='reserver')
+                        
+                        with api.env.adopt_roles(['Manager']):
+                            api.content.transition(context, transition='reserver')
                     
                         IStatusMessage(self.request).addStatusMessage(
                             u"Din reservasjon er bekreftet",
