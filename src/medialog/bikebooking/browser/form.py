@@ -55,8 +55,8 @@ class BookingForm(form.SchemaForm):
             email = data['email']
             name = data['name']
             id = self.context.id
-            mailbody = '<html>Hei, ' + name + '\n' +  '<a href="' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + '&name=' + name + '>Vennligst klikk lenken og bekreft reserveringen</a>"' \
-             + '\n\n\n For senere fjerning av reserveringen, <a href="' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + '&name=' + name + '&bestille=0">klikk her</a></html>'
+            mailbody = 'Hei, ' + name + '\n' +  u'Vennligst klikk lenken og bekreft reserveringen' + '\n' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + "&name=" + name.encode('utf8') \
+             + u'\n\n\n For senere fjerning av reserveringen, klikk her \n' +  self.context.absolute_url() + '/@@confirm-form?email=' + email + "&name=" + name.encode('utf8') + '&bestille=0'
             api.portal.send_email(
                 recipient=data['email'],
                 subject="Sykkelreservasjon",
