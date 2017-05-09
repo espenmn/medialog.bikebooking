@@ -6,6 +6,7 @@
  <permission>View</permission>
  <state state_id="reservert" title="Reservert" >
   <exit-transition transition_id="lei_ut" />
+    <exit-transition transition_id="reserver" />
   <exit-transition transition_id="ta_inn" />
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Authenticated</permission-role>
@@ -38,6 +39,7 @@
  <state state_id="utleid" title="Utleid" >
   <exit-transition transition_id="reserver" />
   <exit-transition transition_id="ta_inn" />
+  <exit-transition transition_id="reserver" />
   <permission-map name="Access contents information" acquired="True">
    
   </permission-map>

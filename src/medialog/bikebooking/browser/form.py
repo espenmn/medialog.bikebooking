@@ -149,6 +149,9 @@ class ConfirmForm(BrowserView):
                         IStatusMessage(self.request).addStatusMessage(
                             u"Din reservering er fjernet", "Info"
                         )
+                        with api.env.adopt_roles(['Manager']):
+                            api.content.transition(context, transition='reserver')
+                        
                         contextURL = api.portal.get().absolute_url()
                         self.request.response.redirect(contextURL)
                     elif len(context.person_pair) >= context.bikes:
@@ -169,8 +172,8 @@ class ConfirmForm(BrowserView):
                             u"Din reservasjon er bekreftet",
                             "info"
                         )
-                    contextURL = api.portal.get().absolute_url()
-                    self.request.response.redirect(contextURL)
+                    #contextURL = api.portal.get().absolute_url()
+                    #self.request.response.redirect(contextURL)
                 except:
                     self.status = "Noe gikk gale med reservasjonen"
         else: 

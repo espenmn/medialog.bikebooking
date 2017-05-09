@@ -30,7 +30,7 @@
 						<h2 tal:content="item/Title" />
 					  </a>
 						<h3 tal:content="item/Description" tal:condition="item/Description"/>
-						<p>Hentes: <span class="pat-moment"   data-pat-moment="format:calendar">
+						<p>Hentes: <span class="pat-moment"   data-pat-moment="format:DD MMMM">
     						${python: item.pickup_date}</span>
 						</p>
 						<a class="button btn context pat-plone-modal" 
