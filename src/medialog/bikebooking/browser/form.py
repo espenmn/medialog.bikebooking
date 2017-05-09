@@ -151,7 +151,7 @@ class ConfirmForm(BrowserView):
                             u"Din reservering er fjernet", "Info"
                         )
                         #with api.env.adopt_roles(['Manager']):
-                        api.content.transition(context, transition='reserver')
+                        #api.content.transition(context, transition='reserver')
                         
                         #contextURL = api.portal.get().absolute_url()
                         #self.request.response.redirect(contextURL)
@@ -167,7 +167,7 @@ class ConfirmForm(BrowserView):
                             self.context.person_pair.append({'name': name, 'email': email})
                         
                         #with api.env.adopt_roles(['Manager']):
-                        api.content.transition(context, transition='reserver')
+                        #api.content.transition(context, transition='reserver')
                     
                         IStatusMessage(self.request).addStatusMessage(
                             u"Din reservasjon er bekreftet",
