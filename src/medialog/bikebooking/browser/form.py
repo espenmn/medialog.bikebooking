@@ -134,7 +134,6 @@ class ConfirmForm(BrowserView):
         context = self.context
         #bestille = self.request.bestille
         #email  = self.request.email
-        import pdb; pdb.set_trace()
         name   = self.request.name.encode('utf8') 
         if checksum == hashlib.sha224(email).hexdigest():
             if email.endswith('medialog.no') or email.endswith('asvg.no'):
