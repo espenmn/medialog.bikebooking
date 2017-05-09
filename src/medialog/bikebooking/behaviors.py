@@ -41,7 +41,7 @@ class IBikeBookingBehavior(form.Schema):
         default=10,
     )
     
-    pickup_date = schema.Date(
+    pickup_date = schema.DateTime(
         title = _("Hentedato", default=u"Hentedato"),
     )
 
