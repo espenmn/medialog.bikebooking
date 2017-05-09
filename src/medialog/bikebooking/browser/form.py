@@ -104,8 +104,8 @@ class BookingForm(form.SchemaForm):
             IStatusMessage(self.request).addStatusMessage(
                 u"En epost blir straks sendt deg. \n Bekreft reservasjonen snarest mulig", "info"
             )
-            contextURL = api.portal.get().absolute_url()
-            self.request.response.redirect(contextURL)
+            #contextURL = api.portal.get().absolute_url()
+            #self.request.response.redirect(contextURL)
         else: 
             self.status = "Kun personer med asvg.no epost kan reservere sykler"
         
