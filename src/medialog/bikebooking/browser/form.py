@@ -55,7 +55,7 @@ class BookingForm(form.SchemaForm):
     #uke = datetime.today().isocalendar()[1]
 
     label = u"Reserver sykkel"
-    description = u"Hvis du nylig har har hatt sykkel stiller kan du kun reservere samme dag. " 
+    description = u"Hvis du nylig har har hatt sykkel kan du kun reservere samme dag. " 
     
     #+  context.uke + "Dvs: mandag " 
     #Week(2011, 40).monday()
@@ -98,7 +98,7 @@ class BookingForm(form.SchemaForm):
                     <html>
                       <head>
                       <style>
-                      .avbestille {background: #c8222c;}
+                      .button.avbestille {background: #c8222c;}
                       .button {
                      border: none;
                      background: #68c831;
@@ -122,7 +122,7 @@ class BookingForm(form.SchemaForm):
                       <body>
                         <p>Hei, %(name)s<br><br>
                            <a class="button" href="%(url)s/@@confirm-form?email=%(email)s&name=%(name)s&mobil=%(mobil)s&klasse=%(klasse)s&checksum=%(checksum)s">Bekreft reserveringen</a><br><br><br>
-                           <br/><hr /><br/>
+                           Husk &aring; lese info her: < href="http://sykkel.asvg.no/rutiner-for-utlan">Rutiner for utlån</a><hr /><br/>
                            <a class="button avbestille" href="%(url)s/@@confirm-form?email=%(email)s&name=%(name)s&mobil=%(mobil)s&klasse=%(klasse)s&checksum=%(checksum)s&bestille=0">Avbestille</a>
                         <br><br/></p>
                       </body>
@@ -224,7 +224,7 @@ class ConfirmForm(BrowserView):
                         )
                     elif self.in_dictlist('email', email):
                         IStatusMessage(self.request).addStatusMessage(
-                            u"Du har allerede hatt sykkel....",
+                            u"Du har reservert sykkel før....",
                             "info"
                         )
                     else:
