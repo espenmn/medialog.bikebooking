@@ -22,7 +22,7 @@
 					animation-delay: 600ms; animation-name: fadeInDown;"
 					tal:define="short python: item.bikes - len(item.person_pair)">
 					<!-- tal:condition="python: item.bikes > len(item.person_pair)"-->
-					<div class="enter ${item/review_state}" 
+					<div class="center ${item/review_state}" 
 						 tal:define="item_url item/getURL|item/absolute_url">
 					  <a href="#" tal:attributes="href item_url">
 						<i>
@@ -40,14 +40,6 @@
 							Reserver sykkel
 						</a>
 						<p class="antall">${short} av ${item/bikes} ledig</p> 
-
-						<!--tal:bookers tal:condition="view/pair">
-						    <ul>
-						    <li tal:repeat="pair view/pair">
-					 
-						    </li>
-						    </ul>
-						</tal:bookers-->
 					</div>            
 
 				</div>
