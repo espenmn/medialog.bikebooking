@@ -7,8 +7,9 @@
       i18n:domain="plone">
 <body>
  
+<metal:title fill-slot="content-title"></metal:title>
  
-<metal:content-core fill-slot="content"
+<metal:content-core fill-slot="content-core"
           tal:define="templateId template/getId;">
  
  
