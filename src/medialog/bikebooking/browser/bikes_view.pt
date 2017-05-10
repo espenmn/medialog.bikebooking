@@ -16,7 +16,7 @@
       	<div class="features">
 			<tal:repeat tal:repeat="item 
 					context/@@contentlisting">
-				<div class="feature  wow fadeInDown animated" 
+				<div class="wow fadeInDown animated" 
 					data-wow-delay="600ms" data-wow-duration="1000ms" 
 					style="visibility: visible; animation-duration: 1000ms; 
 					animation-delay: 600ms; animation-name: fadeInDown;"
