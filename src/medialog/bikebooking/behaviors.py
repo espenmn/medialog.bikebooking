@@ -28,6 +28,15 @@ class IPerson(form.Schema):
         required=True,
     )
 
+    mobil = schema.TextLine(
+        title=_(u'Mobil', 'mobil'),
+        required=False,
+    )
+
+    klasse = schema.TextLine(
+        title=_(u'Klasse', 'klasse'),
+        required=False,
+    )
 
 class IBikeBookingBehavior(form.Schema):
     """ Persons booking"""

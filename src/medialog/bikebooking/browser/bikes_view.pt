@@ -19,8 +19,8 @@
 					data-wow-delay="600ms" data-wow-duration="1000ms" 
 					style="visibility: visible; animation-duration: 1000ms; 
 					animation-delay: 600ms; animation-name: fadeInDown;"
-					tal:define="short python: item.bikes - len(item.person_pair)"
-					tal:condition="python: item.bikes > len(item.person_pair)">
+					tal:define="short python: item.bikes - len(item.person_pair)">
+					<!-- tal:condition="python: item.bikes > len(item.person_pair)"-->
 					<div class="feature center ${item/review_state}" 
 						 tal:define="item_url item/getURL|item/absolute_url">
 					  <a href="#" tal:attributes="href item_url">
@@ -34,8 +34,11 @@
     						${python: item.pickup_date}</span>
 						</p>
 						<a class="button btn context antall-${short} xpat-plone-modal" 
-							tal:attributes="href item_url">Reserver sykkel (${short})</a>
-						
+							tal:attributes="href item_url" 
+							tal:condition="python: item.bikes > len(item.person_pair)">
+							Reserver sykkel
+						</a>
+						<p class="antall">${short} av ${item/bikes} ledig</p> 
 					</div>            
 
 				</div>
