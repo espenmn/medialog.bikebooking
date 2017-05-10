@@ -44,7 +44,7 @@
 						<!--tal:bookers tal:condition="view/pair">
 						    <ul>
 						    <li tal:repeat="pair view/pair">
-						        ${pair}
+					 
 						    </li>
 						    </ul>
 						</tal:bookers-->
