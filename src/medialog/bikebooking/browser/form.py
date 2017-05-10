@@ -224,7 +224,7 @@ class ConfirmForm(BrowserView):
                         )
                     elif self.in_dictlist('email', email):
                         IStatusMessage(self.request).addStatusMessage(
-                            u"Du har reservert sykkel før....",
+                            u"Du har reservert sykkel tidligere....",
                             "info"
                         )
                     else:
