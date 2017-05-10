@@ -122,7 +122,7 @@ class BookingForm(form.SchemaForm):
                       <body>
                         <p>Hei, %(name)s<br><br>
                            <a class="button" href="%(url)s/@@confirm-form?email=%(email)s&name=%(name)s&mobil=%(mobil)s&klasse=%(klasse)s&checksum=%(checksum)s">Bekreft reserveringen</a><br><br><br>
-                           Husk &aring; lese info her: < href="http://sykkel.asvg.no/rutiner-for-utlan">Rutiner for utlån</a><hr /><br/>
+                           Husk &aring; lese info her: < href="http://sykkel.asvg.no/rutiner-for-utlan">Rutiner for utl&aring;n</a><hr /><br/>
                            <a class="button avbestille" href="%(url)s/@@confirm-form?email=%(email)s&name=%(name)s&mobil=%(mobil)s&klasse=%(klasse)s&checksum=%(checksum)s&bestille=0">Avbestille</a>
                         <br><br/></p>
                       </body>
@@ -204,7 +204,6 @@ class ConfirmForm(BrowserView):
                 try:
                     if bestille == '0':
                         if self.in_dictlist('email', email):
-                            import pdb; pdb.set_trace()
                             self.context.person_pair.remove(self.in_dictlist('email', email))
                             api.portal.send_email(
                                 recipient=email,
