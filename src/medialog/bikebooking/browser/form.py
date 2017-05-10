@@ -266,7 +266,7 @@ class BikesView(BrowserView):
     #    return len(self.context.person_pair) < self.context.bikes
     
     def user(self):
-        return plone.api.user.get_current()
+        return api.user.get_current()
          
 
         
