@@ -40,7 +40,7 @@
 							Reserver sykkel
 						</a>
 						<p class="antall">${short} av ${item/bikes} ledig</p> 
-						<tal:bookers tal:condition="python; api.user.get_current()">
+						<tal:bookers tal:condition="python: api.user.get_current()">
 						    <ul>
 						    <li tal:repeat="pair context/person_pair">
 						        ${pair}
