@@ -40,10 +40,10 @@
 							Reserver sykkel
 						</a>
 						<p class="antall">${short} av ${item/bikes} ledig</p> 
-						
-						<tal:bookers tal:condition="view/user">
+
+						<tal:bookers tal:condition="view/pair">
 						    <ul>
-						    <li tal:repeat="pair context/person_pair">
+						    <li tal:repeat="pair view/pair">
 						        ${pair}
 						    </li>
 						    </ul>

@@ -265,8 +265,13 @@ class BikesView(BrowserView):
     #def bikes(self):
     #    return len(self.context.person_pair) < self.context.bikes
     
-    def user(self):
-        return api.user.get_current()
+    
+    def pair(self):
+        if api.user.get_current():
+            return context.person_pair
+        
+        return ""
+        
          
 
         
