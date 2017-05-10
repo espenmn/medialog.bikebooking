@@ -41,13 +41,13 @@
 						</a>
 						<p class="antall">${short} av ${item/bikes} ledig</p> 
 
-						<tal:bookers tal:condition="view/pair">
+						<!--tal:bookers tal:condition="view/pair">
 						    <ul>
 						    <li tal:repeat="pair view/pair">
 						        ${pair}
 						    </li>
 						    </ul>
-						</tal:bookers>
+						</tal:bookers-->
 					</div>            
 
 				</div>
