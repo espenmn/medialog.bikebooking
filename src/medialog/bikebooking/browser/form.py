@@ -159,6 +159,9 @@ class BookingForm(form.SchemaForm):
     def handleCancel(self, action):
         """User cancelled. Redirect back to the front  page.
         """
+        contextURL = api.portal.get().absolute_url()
+        self.request.response.redirect(contextURL)
+        
 alsoProvides(BookingForm, IDisableCSRFProtection)
 
    
