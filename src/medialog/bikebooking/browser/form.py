@@ -301,4 +301,4 @@ class UtleveingView(BrowserView):
         
     
 
-InitializeClass(UtleveringView)
+InitializeClass(UtleveingView)
