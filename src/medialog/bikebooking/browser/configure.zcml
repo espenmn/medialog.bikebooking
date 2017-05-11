@@ -41,5 +41,14 @@
           template="bikes_view.pt"
           class=".form.BikesView"
           />
+          
+        
+    <!--pp client templates -->
+    <browser:page
+      name="asHTML"
+      for="medialog.bikebooking.behaviors.IBikeBookingBehavior"
+      permission="zope2.View"
+      class=".book.BookView"
+      />
 
 </configure>

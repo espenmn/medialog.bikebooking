@@ -20,8 +20,8 @@ from plone.protect.interfaces import IDisableCSRFProtection
 from zope.interface import alsoProvides
 
 
-
-
+from pp.client.plone.browser.compatible import InitializeClass
+ 
 
 
 class IBookingForm(form.Schema):
@@ -200,10 +200,10 @@ class ConfirmForm(BrowserView):
     
     def render(self, email="", name="", bestille="", checksum="nothing", klasse="", mobil=""):
         context = self.context
-        #email  = email.decode('utf8') 
-        #klasse = klasse.decode('utf8')
+        email  = email.decode('utf8') 
+        klasse = klasse.decode('utf8')
         #mobil = mobil.decode('utf8')
-        #name   = name.decode('utf8'
+        name   = name.decode('utf8')
         if checksum == hashlib.sha224(email).hexdigest():
             if email.endswith('medialog.no') or email.endswith('asvg.no'):
                 try:
@@ -279,6 +279,26 @@ class BikesView(BrowserView):
         
          
 
+
+class UtleveingView(BrowserView):
+    """ Make PDF for utlevering.
+    """
+    
+
+
+    template = ViewPageTemplateFile('utlevering.pt')
+
+    def __call__(self, *args, **kw):
+        transformations = (
+            'makeImagesLocal',
+            'convertFootnotes',
+            'removeCrapFromHeadings',
+            'fixHierarchies',
+            'addTableOfContents',
+         )
+         
+        return self.template(self.context)
         
     
-    
+
+InitializeClass(UtleveringView)
