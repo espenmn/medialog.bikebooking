@@ -286,7 +286,7 @@ class UtleveingView(BrowserView):
     
 
 
-    template = ViewPageTemplateFile('utlevering.pt')
+    template = ViewPageTemplateFile('utleveringview.pt')
 
     def __call__(self, *args, **kw):
         transformations = (
