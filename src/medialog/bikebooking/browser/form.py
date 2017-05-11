@@ -283,8 +283,6 @@ class BikesView(BrowserView):
 class UtleveingView(BrowserView):
     """ Make PDF for utlevering.
     """
-    
-
 
     template = ViewPageTemplateFile('utleveringview.pt')
 
