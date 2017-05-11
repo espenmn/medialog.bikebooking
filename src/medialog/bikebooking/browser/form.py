@@ -29,6 +29,7 @@ class IBookingForm(form.Schema):
 
     name = schema.TextLine(
             title=u"Navn",
+            description=u"Du må være elev på Amalie Skram vgs",
         )
     
     klasse = schema.TextLine(
@@ -37,6 +38,7 @@ class IBookingForm(form.Schema):
         
     email =  Email(
             title=u"Epost",
+            description=u"Du må ha en fungerende epostadresse i asvg.no domenet"
         )
     mobil = schema.TextLine(
             title=u"Mobil",
@@ -55,7 +57,7 @@ class BookingForm(form.SchemaForm):
     #uke = datetime.today().isocalendar()[1]
 
     label = u"Reserver sykkel"
-    description = u"Hvis du nylig har har hatt sykkel kan du kun reservere samme dag. " 
+    description = u"<b>Prioriteringer</b><br/>Hver elev kan som hovedregel bestille el-sykkel 1 uke pr skole&aring;r.<br/> Hvis det fortsatt er ledige sykler utleveringsdagen, kan du bestille ekstra uke."
     
     #+  context.uke + "Dvs: mandag " 
     #Week(2011, 40).monday()
@@ -74,6 +76,7 @@ class BookingForm(form.SchemaForm):
             #index is not working properly, not sure why
             for pair in brain.getObject().person_pair:
                 #print pair
+                import pdb; pdb.set_trace()
                 if pair[key].lower() == value.lower():
                     return True
         return False
@@ -122,7 +125,7 @@ class BookingForm(form.SchemaForm):
                       <body>
                         <p>Hei, %(name)s<br><br>
                            <a class="button" href="%(url)s/@@confirm-form?email=%(email)s&name=%(name)s&mobil=%(mobil)s&klasse=%(klasse)s&checksum=%(checksum)s">Bekreft reserveringen</a><br><br><br>
-                           Husk &aring; lese info her: <a href="http://sykkel.asvg.no/rutiner-for-utlan">Rutiner for utl&aring;n</a><br/>
+                           Husk &aring; lese: <a href="http://sykkel.asvg.no/rutiner-for-utlan">Rutiner for utl&aring;n</a><br/>
                            <a class="button avbestille" href="%(url)s/@@confirm-form?email=%(email)s&name=%(name)s&mobil=%(mobil)s&klasse=%(klasse)s&checksum=%(checksum)s&bestille=0">Avbestille</a>
                         <br><br/></p>
                       </body>
