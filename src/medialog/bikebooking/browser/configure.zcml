@@ -46,7 +46,7 @@
     <!--pp client templates -->
     <browser:page
       name="asHTML"
-      for="medialog.bikebooking.behaviors.IBikeBookingBehavior"
+      for="plone.dexterity.content.Item"
       permission="zope2.View"
       class=".form.UtleveringView"
       />
