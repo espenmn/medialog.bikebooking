@@ -33,7 +33,7 @@ html {
   margin-left: 15mm;
   margin-right: 15mm;
     font-family:  "DejaVu", "DejaVu Sans", "Arial", "Helvetica";
-    font-size: 75%;
+    font-size: 55%;
     line-height: 150%;
 } 
 
@@ -41,6 +41,7 @@ html {
 html, body, p {
   orphans:4; 
   widows:2;
+  font-size: 55%;
 }
 
 
@@ -54,9 +55,7 @@ hr, .chapter-break {
     page-break-after:always;
    }     
 	
-.chapter_frontpage {
-	text-align: center;
-}
+ 
   
 
   
@@ -109,11 +108,16 @@ h5, h6 {
 
 table, figure {
   page-break-inside: avoid;
+  font-size: 13pt;
 }
 
 
 p {
 	margin-bottom: 2mm;
+}
+
+a {
+	color: #006298;
 }
 
 img {
@@ -140,6 +144,8 @@ tr, td {
 #content th  {
 	padding: 7px 15px;
 }
+
+th,
 td {
     border: 1px solid #ccc;
     margin: 0;

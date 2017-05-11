@@ -9,7 +9,7 @@
 
 <div class="main">
  <section>
-  <h2>Sykler: ${context/Title}</h2>
+  <h1>Sykler: ${context/Title}</h1>
  <table>
  <tr>
     <th>Navn</th>
