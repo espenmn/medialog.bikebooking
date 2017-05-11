@@ -10,13 +10,13 @@
 <div class="main">
  <section>
   <h1>${context/Title}</h1>
- <table tal:define="persons context/person_pair">
+ <table tal:define="persons context/getObject/person_pair">
  <tr>
     <th>Navn<th>
     <th>Epost</th>
     <th>Mobil</th>
     <th>Klasse</th></tr>
-  <tr tal:repeat="person persons"> 
+  <tr tal:repeat="person context/person_pair"> 
    <td>
       ${person['name']}  
    </td>
