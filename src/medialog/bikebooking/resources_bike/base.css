@@ -108,6 +108,7 @@ h5, h6 {
 
 table, figure {
   page-break-inside: avoid;
+  font-size: 13pt;
 }
 
 
