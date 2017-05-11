@@ -74,7 +74,7 @@ class BookingForm(form.SchemaForm):
             #index is not working properly, not sure why
             for pair in brain.getObject().person_pair:
                 #print pair
-                if pair[key] == value:
+                if pair[key].lower() == value.lower():
                     return True
         return False
     
@@ -154,7 +154,7 @@ class BookingForm(form.SchemaForm):
         
     @button.buttonAndHandler(u"Avbryt")
     def handleCancel(self, action):
-        """User cancelled. Redirect back to the page.
+        """User cancelled. Redirect back to the front  page.
         """
 alsoProvides(BookingForm, IDisableCSRFProtection)
 
