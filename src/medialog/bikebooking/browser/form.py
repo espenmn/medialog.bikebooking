@@ -29,7 +29,7 @@ class IBookingForm(form.Schema):
 
     name = schema.TextLine(
             title=u"Navn",
-            description=u"Du må være elev på Amalie Skram vgs",
+            description=u"Kun elever p&aring; Amalie Skram vgs",
         )
     
     klasse = schema.TextLine(
@@ -38,7 +38,7 @@ class IBookingForm(form.Schema):
         
     email =  Email(
             title=u"Epost",
-            description=u"Du må ha en fungerende epostadresse i asvg.no domenet"
+            description=u"Du m&aring; ha en fungerende epostadresse i asvg.no domenet"
         )
     mobil = schema.TextLine(
             title=u"Mobil",
