@@ -10,15 +10,15 @@
 <div class="main">
  <section>
   <h1>${context/Title}</h1>
- <table tal:define="persons context/getObject/person_pair">
+ <table tal:define="persons context/getObject">
  <tr>
     <th>Navn<th>
     <th>Epost</th>
     <th>Mobil</th>
     <th>Klasse</th></tr>
-  <tr tal:repeat="person persons"> 
+  <tr tal:repeat="person persons/person_pair"> 
    <td>
-      ${person['name']}  
+      ${person}  
    </td>
   </tr>
  </section>
