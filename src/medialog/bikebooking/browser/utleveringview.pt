@@ -16,7 +16,7 @@
     <th>Epost</th>
     <th>Mobil</th>
     <th>Klasse</th></tr>
-  <tr tal:repeat="person context/person_pair"> 
+  <tr tal:repeat="person persons"> 
    <td>
       ${person['name']}  
    </td>
