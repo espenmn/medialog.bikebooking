@@ -8,7 +8,7 @@
 <body>
 
 <div class="main">
- <section class="chapter" tal:condition="python: context.Type=='uke'">
+ <section>
  <h1>${context/Title}</h1>
    <div>${context/person_pair}</div>
  </section>
