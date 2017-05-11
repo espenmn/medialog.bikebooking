@@ -41,6 +41,7 @@ html {
 html, body, p {
   orphans:4; 
   widows:2;
+  font-size: 55%;
 }
 
 
@@ -54,9 +55,7 @@ hr, .chapter-break {
     page-break-after:always;
    }     
 	
-.chapter_frontpage {
-	text-align: center;
-}
+ 
   
 
   
@@ -114,6 +113,10 @@ table, figure {
 
 p {
 	margin-bottom: 2mm;
+}
+
+a {
+	color: #006298;
 }
 
 img {

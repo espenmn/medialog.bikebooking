@@ -9,10 +9,10 @@
 
 <div class="main">
  <section>
-  <h1>${context/Title}</h1>
+  <h2>Sykler: ${context/Title}</h2>
  <table>
  <tr>
-    <th>Navn<th>
+    <th>Navn</th>
     <th>Epost</th>
     <th>Mobil</th>
     <th>Klasse</th>
