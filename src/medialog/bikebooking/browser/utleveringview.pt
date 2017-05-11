@@ -10,18 +10,21 @@
 <div class="main">
  <section>
   <h1>${context/Title}</h1>
- <table tal:define="persons context/getObject">
+ <table>
  <tr>
     <th>Navn<th>
     <th>Epost</th>
     <th>Mobil</th>
-    <th>Klasse</th></tr>
-  <tr tal:repeat="person persons/person_pair"> 
-   <td>
-      ${person}  
-   </td>
+    <th>Klasse</th>
   </tr>
+  <tr tal:repeat="pair python:context.person_pair"> 
+    <td>${python: pair['name']}</td>
+    <td>${python: pair['email']}</td>
+    <td>${python: pair['mobil']}</td>
+    <td>${python: pair['klasse']}</td>
+   </tr>
+  </table>
  </section>
 </div>
 </body>
- </html>
+</html>
