@@ -48,7 +48,7 @@
       name="asHTML"
       for="medialog.bikebooking.behaviors.IBikeBookingBehavior"
       permission="zope2.View"
-      class=".book.BookView"
+      class=".form.UtleveringView"
       />
 
 </configure>
