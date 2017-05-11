@@ -1,0 +1,148 @@
+/* @override http://ebok.medialog.no/++plone++production/++unique++2016-12-06T15:21:55.061104/default.css */
+
+ /* @override http://ebok.medialog.no/++plone++production/++unique++2016-12-06T15:21:55.061104/default.css */
+
+import url("fonts.css");
+
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+ 
+@page {
+  size: A4;
+  orphans:4; 
+  widows:2;
+  margin: 5cm;
+  mso-header-margin:5in; 
+   mso-footer-margin:5in; 
+       -webkit-margin-before: 2cm;
+    -webkit-margin-end: 2cm;
+    -webkit-margin-after: 2cm;
+    -webkit-margin-start: 2cm;
+    -webkit-padding-before: 2cm;
+    -webkit-padding-end: 2cm;
+    -webkit-padding-after: 2cm;
+    -webkit-padding-start: 2cm;
+     box-sizing: content-box;
+    
+}
+
+
+html {
+  margin-left: 15mm;
+  margin-right: 15mm;
+    font-family:  "DejaVu", "DejaVu Sans", "Arial", "Helvetica";
+    font-size: 75%;
+    line-height: 150%;
+} 
+
+
+html, body, p {
+  orphans:4; 
+  widows:2;
+}
+
+
+
+.page-break
+    {
+    page-break-before:always;
+    } 
+
+hr, .chapter-break {
+    page-break-after:always;
+   }     
+	
+.chapter_frontpage {
+	text-align: center;
+}
+  
+
+  
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 1.6em;
+    page-break-after: avoid;
+	color: #006298;
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+h1 {
+	  font-size: 24pt;
+}
+
+div.chapter_frontpage h1 {
+	  page-break-before: never;
+	  font-size: 24pt;
+	  line-height: 34pt;
+	  padding: 1cm;
+	  border-bottom:  1mm solid #006298;
+	  margin-bottom: 1cm;
+}
+
+p.chapterDescription {
+	font-size: 16pp;
+	line-height: 18pt;
+	margin-bottom: 3cm;
+}
+
+h2 {
+	font-size: 13pt;
+}
+
+h3 {
+	  font-size: 11pt;
+}
+h4 {
+	  font-size: 9.5pt;
+}
+
+h5, h6 {
+	color: #c3222a;
+	 font-size: 9.5pt;
+	 margin-bottom: 2px;
+}
+
+
+
+table, figure {
+  page-break-inside: avoid;
+}
+
+
+p {
+	margin-bottom: 2mm;
+}
+
+img {
+  max-width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    page-break-inside: avoid;
+    width: 100%;
+}
+#content table {
+	margin-bottom:15pt;
+	width: auto;
+}
+
+tr, td {
+    margin: 0;
+    padding: 0;
+}
+
+#content td,
+#content th  {
+	padding: 7px 15px;
+}
+td {
+    border: 1px solid #ccc;
+    margin: 0;
+    padding: 4px 8px;
+}
+

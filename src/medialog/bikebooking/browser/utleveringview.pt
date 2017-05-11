@@ -9,10 +9,19 @@
 
 <div class="main">
  <section>
- <h1>${context/Title}</h1>
-   <div>${context/person_pair}</div>
+  <h1>${context/Title}</h1>
+ <table tal:define="persons context/person_pair">
+ <tr>
+    <th>Navn<th>
+    <th>Epost</th>
+    <th>Mobil</th>
+    <th>Klasse</th></tr>
+  <tr tal:repeat="person persons"> 
+   <td tal:repeat="kol person">
+      ${kol}  
+   </td>
+  </tr>
  </section>
- 
 </div>
 </body>
  </html>
