@@ -19,7 +19,7 @@
   </tr>
   <tr tal:repeat="pair python:context.person_pair"> 
     <td>${python: pair['name']}</td>
-    <td>${python: pair['email']}</td>
+    <td><a href="mailto:${python: pair['email']}">${python: pair['email']}</a></td>
     <td>${python: pair['mobil']}</td>
     <td>${python: pair['klasse']}</td>
    </tr>

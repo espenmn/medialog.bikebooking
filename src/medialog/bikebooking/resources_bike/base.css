@@ -33,7 +33,7 @@ html {
   margin-left: 15mm;
   margin-right: 15mm;
     font-family:  "DejaVu", "DejaVu Sans", "Arial", "Helvetica";
-    font-size: 75%;
+    font-size: 55%;
     line-height: 150%;
 } 
 
@@ -140,6 +140,8 @@ tr, td {
 #content th  {
 	padding: 7px 15px;
 }
+
+th,
 td {
     border: 1px solid #ccc;
     margin: 0;
