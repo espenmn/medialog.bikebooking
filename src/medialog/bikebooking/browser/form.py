@@ -76,7 +76,6 @@ class BookingForm(form.SchemaForm):
             #index is not working properly, not sure why
             for pair in brain.getObject().person_pair:
                 #print pair
-                import pdb; pdb.set_trace()
                 if pair[key].lower() == value.lower():
                     return True
         return False
@@ -195,7 +194,7 @@ class ConfirmForm(BrowserView):
             #index is not working properly, not sure why
             for pair in brain.getObject().person_pair:
                 #print brain.person_pair
-                if pair[key] == value:
+                if pair[key].lower() == value.lower():
                     return pair
         return False
     
