@@ -17,8 +17,8 @@
     <th>Mobil</th>
     <th>Klasse</th></tr>
   <tr tal:repeat="person persons"> 
-   <td tal:repeat="kol person">
-      ${kol}  
+   <td>
+      ${person['name']}  
    </td>
   </tr>
  </section>
