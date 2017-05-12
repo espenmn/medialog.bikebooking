@@ -24,6 +24,11 @@ import url("fonts.css");
      box-sizing: content-box;
 }
 
+.pickupdate {
+	font-size: 80%;
+	color:  #CCC;
+}
+
 .pagenumber {
 	text-align: center;
 	width: 100%;
