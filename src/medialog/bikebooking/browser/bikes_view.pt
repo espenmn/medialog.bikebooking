@@ -41,7 +41,7 @@
                             Reserver sykkel
                         </a>
                         <p class="antall">${short} av ${item/bikes} ledig</p> 
-                        <div tal:condition="anon">
+                        <div tal:condition="not:anon">
                             <table>
                              <tr>
                                 <th>Navn</th>
@@ -49,7 +49,7 @@
                                 <th>Mobil</th>
                                 <th>Klasse</th>
                               </tr>
-                              <tr tal:repeat="pair python:context.person_pair"> 
+                              <tr tal:repeat="pair python:item.person_pair"> 
                                 <td>${python: pair['name']}</td>
                                 <td><a href="mailto:${python: pair['email']}">${python: pair['email']}</a></td>
                                 <td>${python: pair['mobil']}</td>
