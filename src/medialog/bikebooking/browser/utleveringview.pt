@@ -27,6 +27,25 @@
   </table>
   </p>
  </section>
+ <section tal:repeat="pair python:context.person_pair"> 
+    <img class="aslogo" src="logoas.jpg">
+    <!--p class="dato">Dato</p---> 
+    <h1 class="tittel" tal:condition="context/avtale-om-sykkelutlan">${context/avtale-om-sykkelutlan/Title}</h1>
+    <div class="person">
+     <p class="name"><b>Navn:     </b>${python: pair['name']}</p>
+     <p class="email"><b>Epost:   </b>${python: pair['email']}</p>
+     <p class="mobil"><b>Mobil:   </b>${python: pair['mobil']}</p>
+     <p class="klasse"><b>Klasse: </b>${python: pair['klasse']}</p>
+    </div>
+    <div class="avtaletekst"  tal:condition="context/avtale-om-sykkelutlan/text">
+     <div tal:replace="structure: context/avtale-om-sykkelutlan/text/output" />
+    </div>
+    <div class="signaturer">
+        <p class="elevsign">Elev</p>
+        <p class="assign">Amalie Skram</p>
+    </div>
+ </section>
+ 
 </div>
 </body>
 </html>
