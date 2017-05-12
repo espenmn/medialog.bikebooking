@@ -10,6 +10,7 @@
 <div class="main">
  <section>
   <h1>Sykler: ${context/Title}</h1>
+ <p>
  <table>
  <tr>
     <th>Navn</th>
@@ -24,6 +25,7 @@
     <td>${python: pair['klasse']}</td>
    </tr>
   </table>
+  </p>
  </section>
 </div>
 </body>
