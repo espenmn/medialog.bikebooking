@@ -136,7 +136,7 @@ class BookingForm(form.SchemaForm):
                              'checksum': checksum,
                              'klasse' : klasse,
                              'mobil': mobil,
-                             'uke': self.context.Title();
+                             'uke': self.context.Title(),
                         }
                     
                 mailbody = MIMEText(html, 'html')
