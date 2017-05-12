@@ -13,36 +13,57 @@
           tal:define="templateId template/getId;">
  
  
-      	<div class="features">
-			<tal:repeat tal:repeat="item 
-					context/@@contentlisting">
-				<div class="feature wow fadeInDown animated" 
-					data-wow-delay="600ms" data-wow-duration="1000ms" 
-					style="visibility: visible; animation-duration: 1000ms; 
-					animation-delay: 600ms; animation-name: fadeInDown;"
-					tal:define="short python: item.bikes - len(item.person_pair)">
-					<!-- tal:condition="python: item.bikes > len(item.person_pair)"-->
-					<div class="center ${item/review_state}" 
-						 tal:define="item_url item/getURL|item/absolute_url">
-					  <a href="#" tal:attributes="href item_url">
-						<i>
-						<span class='fa iconfont fa-bicycle booked-${short}'> </span>
+        <div class="features">
+            <tal:repeat tal:repeat="item 
+                    context/@@contentlisting">
+                <div class="feature wow fadeInDown animated" 
+                    data-wow-delay="600ms" data-wow-duration="1000ms" 
+                    style="visibility: visible; animation-duration: 1000ms; 
+                    animation-delay: 600ms; animation-name: fadeInDown;"
+                    tal:define="short python: item.bikes - len(item.person_pair);
+                         isAnon context/@@plone_portal_state/anonymous">
+                    <!-- tal:condition="python: item.bikes > len(item.person_pair)"-->
+                    <div class="center ${item/review_state}" 
+                         tal:define="item_url item/getURL|item/absolute_url">
+                      <a href="#" tal:attributes="href item_url">
+                        <i>
+                        <span class='fa iconfont fa-bicycle booked-${short}'> </span>
                         </i>
-						<h2 tal:content="item/Title" />
-					  </a>
-						<h3 tal:content="item/Description" tal:condition="item/Description"/>
-						<p>Hentes: <span class="pat-moment"   data-pat-moment="format:DD MMMM">
-    						${python: item.pickup_date}</span>
-						</p>
-						<a class="button btn context antall-${short} xpat-plone-modal" 
-							tal:attributes="href item_url" 
-							tal:condition="python: item.bikes > len(item.person_pair)">
-							Reserver sykkel
-						</a>
-						<p class="antall">${short} av ${item/bikes} ledig</p> 
-					</div>            
+                        <h2 tal:content="item/Title" />
+                      </a>
+                        <h3 tal:content="item/Description" tal:condition="item/Description"/>
+                        <p>Hentes: <span class="pat-moment"   data-pat-moment="format:DD MMMM">
+                            ${python: item.pickup_date}</span>
+                        </p>
+                        <a class="button btn context antall-${short} xpat-plone-modal" 
+                            tal:attributes="href item_url" 
+                            tal:condition="python: item.bikes > len(item.person_pair)">
+                            Reserver sykkel
+                        </a>
+                        <p class="antall">${short} av ${item/bikes} ledig</p> 
+                        <div tal:condition="not: anon">
+                            <table>
+                             <tr>
+                                <th>Navn</th>
+                                <th>Epost</th>
+                                <th>Mobil</th>
+                                <th>Klasse</th>
+                              </tr>
+                              <tr tal:repeat="pair python:context.person_pair"> 
+                                <td>${python: pair['name']}</td>
+                                <td><a href="mailto:${python: pair['email']}">${python: pair['email']}</a></td>
+                                <td>${python: pair['mobil']}</td>
+                                <td>${python: pair['klasse']}</td>
+                               </tr>
+                            </table>
+                            <a class="button btn context" 
+                                href="/asPDF?converter=phantomjs&resource=resources_bike&template=bike_template.pt">
+                               Last ned skjema
+                            </a> 
+                        </div>
+                    </div>            
 
-				</div>
+                </div>
            </tal:repeat>
     </div>
     <tal:css tal:replace="structure context/@@fontload"/>
