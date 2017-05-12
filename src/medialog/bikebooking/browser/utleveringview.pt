@@ -19,10 +19,10 @@
     <th>Klasse</th>
   </tr>
   <tr tal:repeat="pair python:context.person_pair"> 
-    <td>${python: pair['name']}</td>
-    <td><a href="mailto:${python: pair['email']}">${python: pair['email']}</a></td>
-    <td>${python: pair['mobil']}</td>
-    <td>${python: pair['klasse']}</td>
+    <td class="name">${python: pair['name']}</td>
+    <td class="email"><a href="mailto:${python: pair['email']}">${python: pair['email']}</a></td>
+    <td class="mobil">${python: pair['mobil']}</td>
+    <td class="klasse">${python: pair['klasse']}</td>
    </tr>
   </table>
   </p>

@@ -35,11 +35,13 @@
                         <p>Hentes: <span class="pat-moment"   data-pat-moment="format:DD MMMM">
                             ${python: item.pickup_date}</span>
                         </p>
+                        <tal:anon tal:condition="isAnon">
                         <a class="button btn context antall-${short} xpat-plone-modal" 
                             tal:attributes="href item_url" 
                             tal:condition="python: item.bikes > len(item.person_pair)">
                             Reserver sykkel
                         </a>
+                        </tal:anon>
                         <p class="antall">${short} av ${item/bikes} ledig</p> 
                         <div tal:condition="not:isAnon">
                             <div id="modal" style="display: none">
