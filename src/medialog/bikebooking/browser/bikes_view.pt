@@ -42,7 +42,8 @@
                         </a>
                         <p class="antall">${short} av ${item/bikes} ledig</p> 
                         <div tal:condition="not:isAnon">
-                            <table id="modal" style="display: none">
+                            <div id="modal" style="display: none">
+                             <table>
                              <tr>
                                 <th>Navn</th>
                                 <th>Epost</th>
@@ -55,7 +56,8 @@
                                 <td>${python: pair['mobil']}</td>
                                 <td>${python: pair['klasse']}</td>
                                </tr>
-                            </table>
+                             </table>
+                            </div>
                             <a href="#modal" class="plone-btn plone-btn-lg plone-btn-primary pat-plone-modal">
                             	Se liste</a>
                             <a class="plone-btn plone-btn-lg plone-btn-primary" 
