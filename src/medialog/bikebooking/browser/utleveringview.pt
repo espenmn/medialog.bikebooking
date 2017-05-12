@@ -8,43 +8,63 @@
 <body>
 
 <div class="main">
- <section>
-  <h1>Sykler: ${context/Title}</h1>
+
+  <section>
+  <img class="aslogo" src="/logoas.jpg">
+  
+  <h1><br/>Sykler: ${context/Title}</h1>
+   <p class="pickupdate">${context/pickup_date}</p>
+ 
+  
  <p>
- <table>
+ <table class="smalltable">
  <tr>
     <th>Navn</th>
     <th>Epost</th>
     <th>Mobil</th>
     <th>Klasse</th>
+    <th>Utlevert</th>
+    <th>Returnert</th>
   </tr>
   <tr tal:repeat="pair python:context.person_pair"> 
     <td class="name">${python: pair['name']}</td>
     <td class="email"><a href="mailto:${python: pair['email']}">${python: pair['email']}</a></td>
     <td class="mobil">${python: pair['mobil']}</td>
     <td class="klasse">${python: pair['klasse']}</td>
+    <td></td>
+    <td></td>
    </tr>
   </table>
   </p>
  </section>
- <section tal:repeat="pair python:context.person_pair"> 
-    <img class="aslogo" src="logoas.jpg">
+ 
+ 
+
+ <section class="page-break" tal:repeat="pair python:context.person_pair"> 
+    <img class="aslogo" src="/logoas.jpg">
     <!--p class="dato">Dato</p---> 
-    <h1 class="tittel" tal:condition="context/avtale-om-sykkelutlan">${context/avtale-om-sykkelutlan/Title}</h1>
+    <h1 class="tittel" tal:condition="context/avtale-om-sykkelutlan">${context/avtale-om-sykkelutlan/Title} – ${context/Title}</h1>
     <div class="person">
      <p class="name"><b>Navn:     </b>${python: pair['name']}</p>
      <p class="email"><b>Epost:   </b>${python: pair['email']}</p>
      <p class="mobil"><b>Mobil:   </b>${python: pair['mobil']}</p>
      <p class="klasse"><b>Klasse: </b>${python: pair['klasse']}</p>
+     <p class="utlevering"><b>Utleveringsdato: </b></p>
+     <p class="innlevering"><b>Innleveringsdato: </b></p>
+     <p class="innlevering"><b>Sykkelnr: </b></p>
+     
     </div>
-    <div class="avtaletekst"  tal:condition="context/avtale-om-sykkelutlan/text">
-     <div tal:replace="structure: context/avtale-om-sykkelutlan/text/output" />
+    <hr/>
+    <div class="avtaletekst">
+     <div tal:replace="structure context/avtale-om-sykkelutlan/text/raw"> </div>
     </div>
     <div class="signaturer">
         <p class="elevsign">Elev</p>
         <p class="assign">Amalie Skram</p>
     </div>
  </section>
+ 
+
  
 </div>
 </body>
