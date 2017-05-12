@@ -55,7 +55,7 @@
                                 <td>${python: pair['mobil']}</td>
                                 <td>${python: pair['klasse']}</td>
                                </tr>
-                            </table-->
+                            </table>
                             <a href="#modal" class="plone-btn plone-btn-lg plone-btn-primary pat-plone-modal">
                             	Se liste</a>
                             <a class="button btn context" 
