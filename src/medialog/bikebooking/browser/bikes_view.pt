@@ -42,7 +42,7 @@
                         </a>
                         <p class="antall">${short} av ${item/bikes} ledig</p> 
                         <div tal:condition="not:isAnon">
-                            <table>
+                            <table id="modal2" style="display: none">
                              <tr>
                                 <th>Navn</th>
                                 <th>Epost</th>
@@ -55,9 +55,11 @@
                                 <td>${python: pair['mobil']}</td>
                                 <td>${python: pair['klasse']}</td>
                                </tr>
-                            </table>
+                            </table-->
+                            <a href="#modal" class="plone-btn plone-btn-lg plone-btn-primary pat-plone-modal">
+                            	Se liste</a>
                             <a class="button btn context" 
-                                href="/asPDF?converter=phantomjs&resource=resources_bike&template=bike_template.pt">
+                                href="/asPDF?converter=${item_url}/phantomjs&resource=resources_bike&template=bike_template.pt">
                                Last ned skjema
                             </a> 
                         </div>
