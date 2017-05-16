@@ -44,7 +44,7 @@
                         </tal:anon>
                         <p class="antall">${short} av ${item/bikes} ledig</p> 
                         <div tal:condition="not:isAnon">
-                            <div id="modal" style="display: none">
+                            <div id="modal${item/id}" style="display: none">
                              <table>
                              <tr>
                                 <th>Navn</th>
@@ -60,7 +60,7 @@
                                </tr>
                              </table>
                             </div>
-                            <a href="#modal" class="plone-btn plone-btn-lg plone-btn-primary pat-plone-modal">
+                            <a href="#modal${item/id}" class="plone-btn plone-btn-lg plone-btn-primary pat-plone-modal">
                             	Se liste</a>
                             <a class="plone-btn plone-btn-lg plone-btn-primary" 
                                 href="${item_url}/asPDF?converter=phantomjs&resource=resources_bike&template=bike_template.pt">
