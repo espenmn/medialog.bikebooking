@@ -139,16 +139,16 @@ class BookingForm(form.SchemaForm):
                              'uke': self.context.Title(),
                         }
 
-                    mailbody = MIMEText(html, 'html')
-                    api.portal.send_email(
+                mailbody = MIMEText(html, 'html')
+                api.portal.send_email(
                         recipient=data['email'],
                         subject="Sykkelreservasjon",
                         body= mailbody,
                         )
 
-                    IStatusMessage(self.request).addStatusMessage(
-                        u"En epost blir straks sendt deg. \n Bekreft reservasjonen snarest mulig", "info"
-                    )
+            IStatusMessage(self.request).addStatusMessage(
+                    u"En epost blir straks sendt deg. \n Bekreft reservasjonen snarest mulig", "info"
+            )
                     #contextURL = api.portal.get().absolute_url()
                     #self.request.response.redirect(contextURL)
             else:
