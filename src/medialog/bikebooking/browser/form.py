@@ -151,10 +151,10 @@ class BookingForm(form.SchemaForm):
             )
                     #contextURL = api.portal.get().absolute_url()
                     #self.request.response.redirect(contextURL)
-            else:
-                IStatusMessage(self.request).addStatusMessage(
+
+        IStatusMessage(self.request).addStatusMessage(
                     u"Kun personer med asvg.no epost som ikke har reserver tidligere kan reservere sykler", "warning"
-                )
+        )
 
 
     @button.buttonAndHandler(u"Avbryt")
