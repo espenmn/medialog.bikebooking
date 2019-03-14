@@ -146,9 +146,9 @@ class BookingForm(form.SchemaForm):
                         body= mailbody,
                         )
 
-            IStatusMessage(self.request).addStatusMessage(
+                IStatusMessage(self.request).addStatusMessage(
                     u"En epost blir straks sendt deg. \n Bekreft reservasjonen snarest mulig", "info"
-            )
+                )
                     #contextURL = api.portal.get().absolute_url()
                     #self.request.response.redirect(contextURL)
 
