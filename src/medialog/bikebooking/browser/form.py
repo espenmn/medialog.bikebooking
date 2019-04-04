@@ -147,7 +147,7 @@ class BookingForm(form.SchemaForm):
                         )
 
                 IStatusMessage(self.request).addStatusMessage(
-                    u"En epost blir straks sendt deg. \n Bekreft reservasjonen snarest mulig. \n Vennligst sjekk Søppelpost-mappen hvis du ikke mottar eposten.", "info"
+                    u"En epost blir straks sendt deg. \n Bekreft reservasjonen snarest mulig. \n Vennligst sjekk S&oring;ppelpost-mappen hvis du ikke mottar eposten.", "info"
                 )
                     #contextURL = api.portal.get().absolute_url()
                     #self.request.response.redirect(contextURL)
