@@ -65,6 +65,12 @@ class BookingForm(form.SchemaForm):
 
 
     def in_dictlist(self, key, value):
+        #This is a check to prevent one user to book several bokes
+        # This check was removed 18 september 2020 (see line below)
+        return False
+
+        #Code below this is never run, remove the line above to revert time limit
+        # note the same check is run below, too. So you need to remove it there, too
 
         if self.context.pickup_date <= datetime.today().date():
             return False
@@ -154,7 +160,7 @@ class BookingForm(form.SchemaForm):
                     #self.request.response.redirect(contextURL)
 
         IStatusMessage(self.request).addStatusMessage(
-                    u"Kun personer med asvg.no epost kan reservere sykler", "warning"
+                    u"Kun personer med asvg.no epost som ikke har reserver tidligere kan reservere sykler", "warning"
         )
 
 
