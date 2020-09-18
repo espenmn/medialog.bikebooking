@@ -57,7 +57,8 @@ class BookingForm(form.SchemaForm):
     #uke = datetime.today().isocalendar()[1]
 
     label = u"Reserver sykkel"
-    description = u"<b>Prioriteringer</b><br/>Hver elev kan som hovedregel bestille el-sykkel 1 uke pr skole&aring;r.<br/> Hvis det fortsatt er ledige sykler utleveringsdagen, kan du bestille ekstra uke."
+    #description = u"<b>Prioriteringer</b><br/>Hver elev kan som hovedregel bestille el-sykkel 1 uke pr skole&aring;r.<br/> Hvis det fortsatt er ledige sykler utleveringsdagen, kan du bestille ekstra uke."
+    description = u""
 
     #+  context.uke + "Dvs: mandag "
     #Week(2011, 40).monday()
@@ -185,6 +186,11 @@ class ConfirmForm(BrowserView):
         return self.render(email=email, name=name, bestille=bestille, checksum=checksum, klasse=klasse, mobil=mobil)
 
     def in_dictlist(self, key, value):
+        #This is a check to prevent one user to book several bokes
+        # This check was removed 18 september 2020 (see line below)
+        return False
+
+        #Code below this is never run, remove the line above to revert time limit
 
         #if nobody booked it, let users that has booked before book
         if self.context.pickup_date <= datetime.today().date():
@@ -194,9 +200,7 @@ class ConfirmForm(BrowserView):
         all_weeks = catalog(portal_type='uke')
 
         for brain in all_weeks:
-            #index is not working properly, not sure why
             for pair in brain.getObject().person_pair:
-                #print brain.person_pair
                 if pair[key].lower() == value.lower():
                     return pair
         return False
