@@ -160,7 +160,7 @@ class BookingForm(form.SchemaForm):
                     #self.request.response.redirect(contextURL)
 
         IStatusMessage(self.request).addStatusMessage(
-                    u"Kun personer med asvg.no epost som ikke har reserver tidligere kan reservere sykler", "warning"
+                    u"Kun personer med asvg.no epost kan reservere sykler", "warning"
         )
 
 
